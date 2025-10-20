@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Funpage Sports &amp; Safaris — Adventure, Training &amp; Events</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet"/>
+<style>
+    :root{
+      --green: #008000;
+      --red: #ff0000;
+      --dark-red: #c00000; 
+      --skyblue: #87ceeb;
+      --sand: #f5faff;
+      --dark: #0f1720;
+      --muted: #6b6b6b;
+      --accent: var(--red);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Open Sans",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial;
+      background:var(--sand);
+      color:var(--dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* Keyframes for Animations */
+    @keyframes bounceIn {
+        from { opacity: 0; transform: scale(0.95) translateY(20px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); } /* Adjusted for dropdown */
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header (Fixed Position, Red/Green Gradient) */
+    .header{
+      position:fixed;
+      width:100%;
+      top:0;
+      left:0;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 6%;
+      background:linear-gradient(180deg, rgba(255,0,0,0.95), rgba(0,128,0,0.95)); 
+      box-shadow:0 6px 18px rgba(8,10,12,0.15);
+      color:var(--sand);
+    }
+    .logo{
+      font-family:"Montserrat",sans-serif;
+      font-weight:800;
+      letter-spacing:1px;
+      color:var(--sand);
+      text-decoration:none;
+      font-size:1.15rem;
+    }
+    
+    /* Navigation Base Styles (Desktop Default) */
+    .nav{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    .nav a{
+      color:rgba(255,255,255,0.95);
+      text-decoration:none;
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:8px;
+      transition:all .18s ease;
+      font-size:0.95rem;
+    }
+    .nav a:hover{ background:rgba(255,255,255,0.06); color:var(--accent) }
+    
+    /* Hero styles are preserved */
+    .hero{
+      height:92vh;
+      min-height:620px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:0 4%;
+      background-image: url('https://i.postimg.cc/ZKfrGspD/safari-adventure-hero.jpg');
+      background-size:cover;
+      background-position:center;
+      position:relative;
+      margin-top:64px;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.22));
+      z-index:1;
+    }
+    .hero-inner{
+      z-index:2;
+      max-width:980px;
+      color:var(--sand);
+      padding:28px;
+      border-radius:14px;
+      text-shadow:0 3px 10px rgba(0,0,0,0.35);
+    }
+    .hero h1{
+      margin:0;
+      font-size:3.2rem;
+      line-height:1.02;
+      font-family:"Montserrat",sans-serif;
+      font-weight:800;
+      color: linear-gradient(90deg,var(--amber),var(--accent));
+    }
+    .hero p{
+      margin:18px 0 0;
+      font-size:1.15rem;
+      color:rgba(255,246,230,0.95);
+      max-width:740px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .hero-ctas{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      margin-top:22px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 20px;
+      border-radius:999px;
+      font-weight:700;
+      text-decoration:none;
+      cursor:pointer;
+      border:0;
+      box-shadow:0 8px 30px rgba(2,6,4,0.2);
+      transition:all .22s ease;
+    }
+    .btn-primary{
+      background:linear-gradient(90deg,var(--red),var(--skyblue));
+      color:var(--dark);
+    }
+    .btn-ghost{
+      background:transparent;
+      color:var(--sand);
+      border:2px solid rgba(255,255,255,0.12);
+    }
+    .btn:hover{ transform:translateY(-4px) scale(1.01) }
+
+    /* Services Section preserved */
+    .section{
+      padding:80px 6%;
+    }
+    .section h2{
+      font-family:"Montserrat",sans-serif;
+      font-size:2rem;
+      margin:0 0 22px 0;
+      color:var(--green, #13523b);
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:22px;
+      margin-top:28px;
+    }
+    .card{
+      border-radius:14px;
+      overflow:hidden;
+      position:relative;
+      min-height:360px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      box-shadow:0 10px 30px rgba(8,10,12,0.12);
+      transition:transform .35s ease, box-shadow .35s ease;
+      cursor:pointer;
+      background:#fff;
+    }
+    .card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+    .card::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(6,12,6,0.82), rgba(6,12,6,0.18)); z-index:1; }
+    .card-content{ position:relative; z-index:2; padding:20px 22px; color:var(--sand); }
+    .card h3{ margin:0; font-size:1.25rem; font-weight:800; }
+    .card p{ margin:10px 0 14px; color:rgba(255,255,255,0.9); font-size:0.98rem; }
+    .card .card-actions{ display:flex; gap:10px; }
+    .card .card-actions a{ padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:700; background:rgba(255,255,255,0.95); color:var(--dark); }
+
+    .card:hover{ transform:translateY(-10px); box-shadow:0 26px 60px rgba(8,10,12,0.18); }
+    .card:hover img{ transform:scale(1.12) }
+    
+    /* Testimonial (Slideshow Styles) */
+    .testimonials { 
+        background: #fff; 
+        padding: 60px 6%;
+    }
+    .swiper-container {
+        max-width: 900px; 
+        margin: 0 auto;
+        padding-bottom: 40px; 
+    }
+    .testimonial{ 
+        background:white; 
+        padding:30px; 
+        border-radius:12px; 
+        box-shadow:0 12px 30px rgba(8,10,12,0.08); 
+        margin: 0 auto;
+        min-height: 180px; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    .testimonial p {
+        font-style: italic;
+        font-size: 1.05rem;
+        margin-bottom: 15px;
+        color: var(--dark);
+    }
+    /* Swiper Navigation (Visible Links) and Pagination colors */
+    .swiper-button-next, .swiper-button-prev {
+        color: var(--red) !important;
+        font-size: 1.5rem !important; 
+        width: 38px !important;
+        height: 38px !important;
+    }
+    .swiper-pagination-bullet-active {
+        background: var(--red) !important;
+    }
+    .swiper-slide {
+        height: auto; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* About Section (White Text over Green) */
+    .about{ 
+        color:var(--sand); 
+        padding:72px 6%; 
+        background:linear-gradient(180deg,var(--green) 0%, #2b6b4b 100%); 
+    }
+    .about h2, .about p { 
+        color: var(--sand); 
+    }
+    .about .about-inner{ display:flex; gap:28px; align-items:center; flex-wrap:wrap; }
+    .about .about-text{ flex:1; min-width:280px; }
+    .about .about-photo{ 
+        flex:0 0 360px; 
+        height:260px; 
+        border-radius:12px; 
+        overflow:hidden; 
+        background-image:url('https://i.postimg.cc/Nj6x9bnJ/img-about-2.jpg');
+        background-position:center;
+        background-size:cover;
+        background-repeat:no-repeat;
+        box-shadow:0 12px 30px rgba(8,10,12,0.2);
+        display:block;
+    }
+
+    /* Footer (Red Background) */
+    footer{ 
+        padding:34px 6%; 
+        background:linear-gradient(90deg,var(--red), var(--dark-red)); 
+        color:var(--sand); 
+        display:flex; 
+        align-items:center; 
+        justify-content:space-between; 
+        gap:20px; 
+        flex-wrap:wrap; 
+    }
+    .socials a{ color:var(--sand); margin-left:12px; text-decoration:none; font-size:1.2rem; display:inline-block; padding:8px; border-radius:8px; transition:all .18s ease; }
+    .socials a:hover{ background:rgba(255,255,255,0.06); color:var(--skyblue) } 
+
+    /* Responsive Overrides and Dropdown Menu Logic */
+    @media (max-width:900px){
+      .hero h1{ font-size:2.2rem 
+.about .about-photo{display:block;height:240px !important;flex:1 1 100% !important;margin-top:20px !important;background-size:cover !important;background-position:center !important;}
+}
+      .hero p{ font-size:1rem }
+      .about .about-inner{ flex-direction:column-reverse; }
+      .header{ padding:10px 4% }
+      
+      /* Mobile Image Fix */
+      .about .about-photo{ 
+        flex:0 0 360px; 
+        height:260px; 
+        border-radius:12px; 
+        overflow:hidden; 
+        background-image:url('https://i.postimg.cc/Nj6x9bnJ/img-about-2.jpg');
+        background-position:center;
+        background-size:cover;
+        background-repeat:no-repeat;
+        box-shadow:0 12px 30px rgba(8,10,12,0.2);
+        display:block;
+    }
+      
+      /* DROP DOWN MENU LOGIC */
+      /* Hide horizontal nav by default, set up dropdown positioning */
+      .nav {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 64px; 
+        left: 0;
+        width: 100%;
+        background: linear-gradient(180deg, rgba(255,0,0,0.98), rgba(0,128,0,0.98)); 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        padding: 10px 0;
+        z-index: 1100;
+      }
+      .nav.open {
+        display: flex; /* Show when open */
+        animation: fadeIn 0.3s ease-out; 
+      }
+      .nav a {
+        padding: 12px 6%;
+        text-align: center;
+        width: 100%;
+        border-radius: 0;
+      }
+      .nav a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Show menu toggle button on mobile */
+      .header #menuToggle {
+        display: flex !important;
+        background: transparent;
+        border: none;
+        color: var(--sand);
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Ensure desktop nav is visible and toggle is hidden on large screens */
+    @media (min-width: 901px) {
+        .header #menuToggle {
+            display: none !important;
+        }
+        .nav {
+            display: flex !important;
+            position: static !important; /* Reset position for horizontal menu */
+            background: none !important;
+            box-shadow: none !important;
+        }
+    }
+  
+.testimonials .swiper-container {max-width:1000px;margin:auto;overflow:hidden;}
+.testimonial{max-width:90%;margin:auto;}
+
+
+@media (max-width:900px){
+  .about .about-inner{flex-direction:column;}
+  .about .about-photo{order:-1;display:block;height:240px !important;flex:1 1 100% !important;margin-bottom:20px !important;background-size:cover !important;background-position:center !important;}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<a class="logo" href="#hero">FUNPAGE</a>
+<nav class="nav" id="mainNav">
+<a href="#hero">Home</a>
+<a href="packages.html">Services</a>
+<a href="#testimonials">Testimonials</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+<a href="packages.html">Packages</a></nav>
+<button class="btn btn-ghost" id="menuToggle"><i class="fas fa-bars"></i></button>
+</header>
+<section class="hero" id="hero" role="banner" style="margin-top:64px;position:relative;height:92vh;overflow:hidden;">
+<video autoplay="" loop="" muted="" playsinline="" poster="https://i.postimg.cc/2S4B3hhK/56ecfe02cb41fc25a62dfefa2e7be57e.jpg" preload="auto" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;">
+<source src="https://ia902807.us.archive.org/28/items/ef9dacb2f2e312c6b01fc0242e7567e2_720w/ef9dacb2f2e312c6b01fc0242e7567e2_720w.mp4" type="video/mp4"/>
+</video>
+<div class="hero-inner" style="position:relative;z-index:2;color:white;text-shadow:0 3px 6px rgba(0,0,0,0.7);">
+<h1>Adventure Starts Here — Funpage Sports &amp; Safaris</h1>
+<p>From professional swimming lessons to fully-managed safaris and team-building adventures, we create experiences that build confidence, cohesion, and unforgettable memories.</p>
+<div class="hero-ctas">
+<a class="btn btn-primary" href="#services">Explore Experiences</a>
+<a class="btn btn-ghost" href="booking.html">Book Now</a>
+</div>
+</div>
+</section>
+<svg aria-hidden="true" class="curve" preserveaspectratio="none" viewbox="0 0 1440 80">
+<path d="M0,80 C360,0 1080,0 1440,80 L1440 0 L0 0 Z" fill="#fbf6ef"></path>
+</svg>
+<section aria-labelledby="services-title" class="section services" id="services">
+<div class="container" style="max-width:1200px;margin:0 auto;">
+<h2 id="services-title">Discover Our Experiences</h2>
+<div class="services-grid" id="servicesGrid">
+<div class="card" data-details="" data-service="Professional Swimming Lessons">
+<img alt="Swimming Lessons" src="https://i.postimg.cc/rwdQHhBv/1760527766105.png"/>
+<div class="card-content">
+<h3>Professional Swimming Lessons</h3>
+<p>Certified instructors, structured lessons for all levels — build a lifelong life skill.</p>
+<div class="card-actions">
+<a href="booking.html">Book</a>
+</div>
+</div>
+</div>
+<div class="card" data-details="" data-service="Outdoor Trips &amp; Safaris">
+<img alt="Safaris" src="https://i.postimg.cc/2S4B3hhK/56ecfe02cb41fc25a62dfefa2e7be57e.jpg"/>
+<div class="card-content">
+<h3>Outdoor Trips &amp; Safaris</h3>
+<p>Seamless logistics and unforgettable routes — perfect for schools, families, and teams.</p>
+<div class="card-actions">
+<a href="booking.html">Book</a>
+</div>
+</div>
+</div>
+<div class="card" data-details="" data-service="Team Building &amp; Cohesion">
+<img alt="Team Building" src="https://i.postimg.cc/BnYXV39G/77ae4d89de30e471670756326ce985d4.jpg"/>
+<div class="card-content">
+<h3>Team Building &amp; Cohesion</h3>
+<p>High-impact programs to strengthen communication, leadership and trust within groups.</p>
+<div class="card-actions">
+<a href="booking.html">Book</a>
+</div>
+</div>
+</div>
+<div class="card" data-details="" data-service="Sports &amp; Event Management">
+<img alt="Event Management" src="https://i.postimg.cc/RZZp17L6/12295c6debba65af6dffb92bc544913a.jpg"/>
+<div class="card-content">
+<h3>Sports &amp; Event Management</h3>
+<p>From permits to vendor coordination — we deliver professional, engaging sports events.</p>
+<div class="card-actions">
+<a href="booking.html">Book</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section testimonials" id="testimonials">
+<div class="container" style="max-width:1100px;margin:0 auto;text-align:center;">
+<h2>Hear From Our Clients</h2>
+<div class="swiper-container" id="testimonialSwiper">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<div class="testimonial">
+<p>"The corporate team-building event was perfectly organized and incredibly effective. Our staff morale improved dramatically."</p>
+<p style="font-weight:700;margin-top:8px">— Sarah Wanjiku, HR Manager</p>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="testimonial">
+<p>"My child learned to swim with confidence. Patient instructors and a great learning plan."</p>
+<p style="font-weight:700;margin-top:8px">— Mercy Adhiambo, Parent</p>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="testimonial">
+<p>"Funpage managed our annual athletics meet flawlessly. Professional service and excellent coordination from start to finish."</p>
+<p style="font-weight:700;margin-top:8px">— Ben Omondi, School Games Coordinator</p>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="testimonial">
+<p>"The safari trip planning was stress-free. Every detail was handled, and the experience exceeded our expectations."</p>
+<p style="font-weight:700;margin-top:8px">— Amina Hassan, Family Traveler</p>
+</div>
+</div>
+</div>
+<div class="swiper-pagination"></div>
+
+
+</div>
+</div>
+</section>
+<section class="about" id="about">
+<div class="about-inner" style="max-width:1200px;margin:0 auto;">
+<div class="about-text">
+<h2>About Funpage</h2>
+<p>Funpage Sports &amp; Safaris merges professional instruction with meaningful outdoor experiences. Safety, professionalism and impact guide everything we do.</p>
+<p style="margin-top:12px">Our mission is to empower individuals and teams through expert-led training and memorable outdoor adventures.</p>
+</div>
+<div aria-label="People on safari" class="about-photo" role="img" style="background:url('https://i.postimg.cc/Nj6x9bnJ/img-about-2.jpg') center/cover;height:260px;border-radius:12px;overflow:hidden;box-shadow:0 12px 30px rgba(8,10,12,0.2);"></div>
+</div>
+</section>
+<footer>
+<div style="display:flex;align-items:center;gap:18px;">
+<div style="font-weight:700">© 2025 Funpage Sports &amp; Safaris</div>
+<div style="color:var(--sand);opacity:0.9">| info@funpage.com | +254 791 566 724</div>
+</div>
+<div class="socials">
+<a aria-label="Facebook" href="#"><i class="fab fa-facebook-f"></i></a>
+<a aria-label="Instagram" href="#"><i class="fab fa-instagram"></i></a>
+<a aria-label="WhatsApp" href="#"><i class="fab fa-whatsapp"></i></a>
+</div>
+<div class="modal" id="serviceModal" style="display:none;"></div>
+</footer>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+        // --- Backendless Configuration (Kept for completeness) ---
+        const APPLICATION_ID = 'B669D83D-1513-4C1D-AF08-F7BF4C055542'; 
+        const JS_API_KEY = 'B395986D-78B8-4ABF-987E-106A73B7A79A'; 
+        const PACKAGES_TABLE = 'Packages';
+        const BOOKINGS_TABLE = 'Bookings'; 
+        
+        // WhatsApp Configuration
+        const WHATSAPP_NUMBER = '254791566724'; 
+
+        try {
+            if (typeof Backendless !== 'undefined') {
+                Backendless.initApp(APPLICATION_ID, JS_API_KEY);
+            }
+        } catch (e) {
+            console.error("Failed to initialize Backendless:", e);
+        }
+
+        // Placeholder definitions for functions used in the HTML
+        window.openBookingModal = function(packageId, packageName) { console.log(`Opening modal for: ${packageName}`); };
+        window.consultViaWhatsApp = function(packageName) { console.log(`Consulting via WhatsApp for: ${packageName}`); };
+        window.closeModal = function() { console.log("Closing modal."); };
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+
+            // 1. Dropdown Navigation Toggle Logic
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('open');
+                });
+
+                // Close menu when a link is clicked (for smooth single-page navigation)
+                mainNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        // Only close if we are on a mobile size
+                        if (window.innerWidth <= 900) { 
+                            mainNav.classList.remove('open');
+                        }
+                    });
+                });
+            }
+
+            // 2. Testimonial Slideshow Initialization
+            const testimonialSwiper = new Swiper('#testimonialSwiper', {
+                loop: true,
+                slidesPerView: 1, // Ensures only one testimonial is visible
+                spaceBetween: 30, 
+                autoplay: {
+                    delay: 5000, 
+                    disableOnInteraction: false, 
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+</script>
+</body></html>
