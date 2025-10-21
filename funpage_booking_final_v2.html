@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Book a Package - Funpage Sports & Safaris</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/backendless@latest/dist/backendless.js"></script>
+  <style>
+    :root{
+      --red:#ff0000; --green:#008000; --sand:#f5faff; --dark:#0f1720;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Open Sans',sans-serif;background:var(--sand);color:var(--dark);-webkit-font-smoothing:antialiased}
+    header{background:linear-gradient(180deg, rgba(255,0,0,0.95), rgba(0,128,0,0.95));color:#fff;display:flex;justify-content:space-between;align-items:center;padding:12px 6%;position:sticky;top:0;z-index:1000}
+    .logo{font-family:'Montserrat',sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:1.1rem}
+    nav a{color:#fff;margin-left:18px;text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--red)}
+    .hero{text-align:center;padding:36px 6%;background:#fff}
+    .hero h1{font-family:'Montserrat',sans-serif;color:var(--green);margin:0 0 6px}
+    .hero p{margin:0;color:#444}
+    .packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;padding:24px 6%}
+    .card{background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.08);overflow:hidden;display:flex;flex-direction:column;align-items:stretch}
+    .card img{width:100%;height:170px;object-fit:cover}
+    .card-content{padding:14px;text-align:center;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+    .card-content h3{color:var(--green);margin:0;font-size:1.05rem}
+    .card-content p.price{margin:0;color:#333;font-weight:700}
+    .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:999px;border:0;cursor:pointer;font-weight:700;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .book{background:linear-gradient(90deg,var(--red),var(--green))}
+    .consult{background:#25d366}
+    /* Modal */
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);justify-content:center;align-items:flex-end;padding:20px;z-index:2000}
+    .modal-inner{background:#fff;border-radius:12px;padding:18px;width:100%;max-width:520px;box-shadow:0 10px 40px rgba(0,0,0,0.2)}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .modal-header h2{font-size:1.15rem;color:var(--green);margin:0}
+    .close{background:transparent;border:0;font-size:1.4rem;cursor:pointer;color:#333}
+    form label{font-size:0.95rem;color:#222;margin-top:8px;display:block}
+    input[type=text],input[type=tel],input[type=date],input[type=number],textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d9d9d9;margin-top:6px;font-size:0.95rem}
+    textarea{min-height:80px;resize:vertical}
+    .payment-info{background:#f7f7f7;border-left:4px solid var(--green);padding:10px;margin-top:10px;font-size:0.95rem;color:#222;border-radius:6px}
+    .submit-row{display:flex;gap:10px;margin-top:12px;align-items:center}
+    .submit-btn{flex:1;padding:11px;border-radius:8px;border:0;background:linear-gradient(90deg,var(--red),var(--green));color:#fff;font-weight:800;cursor:pointer}
+    .spinner{width:20px;height:20px;border:3px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .success-msg{background:#e9fbe9;border-left:4px solid var(--green);padding:10px;margin-top:10px;border-radius:6px;color:#0b6a0b}
+    /* Responsive tweaks */
+    @media (max-width:600px){
+      .modal{align-items:flex-end;padding:12px}
+      .modal-inner{padding:14px;border-radius:10px}
+      .card img{height:150px}
+      header{padding:10px 4%}
+      .packages-grid{padding:14px 4%;gap:12px}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo">FUNPAGE</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="booking.html">Book</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Book Your Next Adventure</h1>
+  <p>Choose a package and complete a quick booking using M-Pesa Paybill.</p>
+</section>
+
+<div id="packagesGrid" class="packages-grid">
+  <p style="grid-column:1/-1;text-align:center;color:#666">Loading packages...</p>
+</div>
+
+<!-- Modal -->
+<div id="bookingModal" class="modal" aria-hidden="true">
+  <div class="modal-inner" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header">
+      <h2 id="modalTitle">Finalize Booking</h2>
+      <button class="close" aria-label="Close" onclick="closeModal()">&times;</button>
+    </div>
+
+    <p style="margin:0 0 10px;color:#444">Fill in your details below to submit your booking request.</p>
+
+    <form id="bookingForm" autocomplete="on">
+      <label for="clientName">Your Full Name:</label>
+      <input id="clientName" name="clientName" type="text" required placeholder="John Mwangi">
+
+      <label for="phone">Phone Number:</label>
+      <input id="phone" name="phone" type="tel" required placeholder="0712345678">
+
+      <label for="startDate">Preferred Start Date:</label>
+      <input id="startDate" name="startDate" type="date" required>
+
+      <label for="pax">Number of People (Pax):</label>
+      <input id="pax" name="pax" type="number" min="1" required placeholder="e.g. 4">
+
+      <label for="transactionCode">M-Pesa Transaction Code (E.g., OAC98V5L9A):</label>
+      <input id="transactionCode" name="transactionCode" type="text" required placeholder="Enter the 10-digit M-Pesa code">
+
+      <label for="message">Additional Message (optional):</label>
+      <textarea id="message" name="message" placeholder="Any special requests"></textarea>
+
+      <div class="payment-info" id="paymentInfo">
+        <strong>Manual Payment Details (M-Pesa Paybill)</strong><br>
+        Bank: Equity Bank<br>
+        Business No: 247247<br>
+        Account No: 0791566724<br>
+        Account Name: Godwill Owiti
+      </div>
+
+      <input type="hidden" id="selectedPackageId" name="packageId">
+
+      <div class="submit-row">
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span id="btnText">Confirm and Submit Booking</span>
+        </button>
+      </div>
+
+      <div id="responseMessage" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<footer style="margin-top:18px;padding:18px 6%;background:linear-gradient(90deg,var(--red),#c00000);color:#fff;text-align:center">
+  © 2025 Funpage Sports & Safaris | info@funpage.com | +254 791 566 724
+</footer>
+
+<script>
+  const APPLICATION_ID = 'B669D83D-1513-4C1D-AF08-F7BF4C055542';
+  const JS_API_KEY = 'B395986D-78B8-4ABF-987E-106A73B7A79A';
+  const PACKAGES_TABLE = 'Packages';
+  const BOOKINGS_TABLE = 'Bookings';
+
+  Backendless.initApp(APPLICATION_ID, JS_API_KEY);
+
+  async function loadPackages(){
+    const grid = document.getElementById('packagesGrid');
+    try{
+      const packages = await Backendless.Data.of(PACKAGES_TABLE).find();
+      if(!packages || packages.length === 0){
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#666">No packages found.</p>';
+        return;
+      }
+      grid.innerHTML = packages.map(pkg => `
+        <div class="card" role="article" aria-label="${pkg.name}">
+          <img src="${pkg.image || ''}" alt="${pkg.name}">
+          <div class="card-content">
+            <div>
+              <h3>${pkg.name}</h3>
+              <p class="price">Ksh ${pkg.price ? Number(pkg.price).toLocaleString() : '—'}</p>
+            </div>
+            <div class="btns">
+              <button class="btn book" onclick='openModal("${pkg.objectId}", "${escapeHtml(pkg.name)}")'><i class="fas fa-calendar-check"></i> Book Now</button>
+              <a class="btn consult" href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20book%20${encodeURIComponent(pkg.name)}" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> Consult</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }catch(err){
+      console.error('Load packages error',err);
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:red">Failed to load packages.</p>';
+    }
+  }
+
+  function escapeHtml(text){
+    if(!text) return '';
+    return String(text).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function openModal(id, name){
+    document.getElementById('selectedPackageId').value = id || '';
+    document.getElementById('modalTitle').innerText = `Finalize Booking: ${name || 'Package'}`;
+    document.getElementById('responseMessage').innerHTML = '';
+    document.getElementById('bookingModal').style.display = 'flex';
+    // focus first input on mobile for better UX
+    setTimeout(()=>document.getElementById('clientName').focus(),250);
+  }
+
+  function closeModal(){
+    document.getElementById('bookingModal').style.display = 'none';
+  }
+
+  // Save booking to Backendless
+  document.getElementById('bookingForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const responseMessage = document.getElementById('responseMessage');
+
+    const data = {
+      clientName: document.getElementById('clientName').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      startDate: document.getElementById('startDate').value,
+      pax: Number(document.getElementById('pax').value) || 1,
+      transactionCode: document.getElementById('transactionCode').value.trim(),
+      message: document.getElementById('message').value.trim(),
+      packageId: document.getElementById('selectedPackageId').value,
+      status: 'Pending',
+      created: new Date().toISOString()
+    };
+
+    // Basic validation
+    if(!data.clientName || !data.phone || !data.packageId || !data.transactionCode){
+      responseMessage.innerHTML = '<div style="color:#b22222;font-weight:700;margin-top:10px">Please fill all required fields.</div>';
+      return;
+    }
+
+    try{
+      // show spinner
+      btnText.style.display = 'none';
+      const spinner = document.createElement('span');
+      spinner.className = 'spinner';
+      submitBtn.prepend(spinner);
+      submitBtn.disabled = true;
+
+      await Backendless.Data.of(BOOKINGS_TABLE).save(data);
+
+      responseMessage.innerHTML = '<div class="success-msg">✅ Booking submitted. We will contact you shortly.</div>';
+      // reset form
+      this.reset();
+      // close modal after short delay
+      setTimeout(()=>{ closeModal(); }, 1200);
+    }catch(err){
+      console.error('Save booking error',err);
+      responseMessage.innerHTML = '<div style="color:#b22222;font-weight:700;margin-top:10px">Failed to submit booking. Please try again.</div>';
+    }finally{
+      // remove spinner and restore button
+      const spinnerEl = submitBtn.querySelector('.spinner');
+      if(spinnerEl) spinnerEl.remove();
+      btnText.style.display = '';
+      submitBtn.disabled = false;
+    }
+  });
+
+  // close modal when clicking outside inner box
+  document.getElementById('bookingModal').addEventListener('click', function(e){
+    if(e.target === this) closeModal();
+  });
+
+  document.addEventListener('DOMContentLoaded', loadPackages);
+</script>
+</body>
+</html>
