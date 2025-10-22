@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Services - Funpage Sports &amp; Safaris</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+:root {
+  --red: #d62828;
+  --green: #007f5f;
+  --light: #f5faff;
+  --dark: #1b1b1b;
+  --muted: #666;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Open Sans', sans-serif; background: var(--light); color: var(--dark); }
+header {
+  background: linear-gradient(90deg, var(--red), var(--green));
+  color: #fff; padding: 16px 6%; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 1000;
+}
+.logo { font-family: 'Montserrat', sans-serif; font-weight: 800; color: #fff; text-decoration: none; font-size: 1.2rem; }
+nav a { color: #fff; margin-left: 16px; text-decoration: none; font-weight: 600; }
+nav a:hover { text-decoration: underline; }
+
+.hero {
+  /* Retained hero background image */
+  background: url('https://i.postimg.cc/jSmCBcGD/IMG-20251022-WA0012.jpg') center/cover no-repeat;
+  text-align: center; padding: 80px 6%; position: relative; color: #fff;
+}
+.hero::before { content:""; position:absolute; inset:0; background:rgba(0,0,0,0.5);}
+.hero h1, .hero p { position: relative; z-index:1; }
+.hero h1 { font-family: 'Montserrat', sans-serif; font-size:2.5rem; margin-bottom:10px; }
+.hero p { font-size:1.1rem; }
+
+.container { max-width: 1200px; margin: 40px auto; padding: 0 6%; }
+.service-card {
+  background: #fff; border-radius: 16px; box-shadow:0 10px 25px rgba(0,0,0,0.05);
+  margin-bottom: 30px; overflow: hidden;
+  transform: translateY(40px); opacity:0; transition: all 0.6s ease-out;
+}
+.service-card.visible { transform: none; opacity: 1; }
+.service-card img { width:100%; height:250px; object-fit:cover; }
+.service-content { padding: 30px; }
+.service-content h2 { font-family:'Montserrat', sans-serif; display:flex; align-items:center; gap:12px; font-size:1.4rem; margin-bottom:8px; }
+.icon-circle { width:50px; height:50px; border-radius:50%; background: linear-gradient(135deg,var(--red),var(--green)); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+}
+.service-content p { color:var(--muted); line-height:1.6; margin-bottom:8px; }
+.more-content { display:none; margin-top:10px; color: var(--muted); line-height:1.7; }
+.more-content ul { padding-left:20px; list-style: disc; }
+.actions { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+.btn { padding:10px 18px; border-radius:999px; color:white; font-weight:600; border:none; cursor:pointer; text-decoration:none; }
+.explore { background: linear-gradient(90deg,var(--red),var(--green)); }
+.consult { background:#25d366; }
+.view-packages { display:block; margin:40px auto; background: linear-gradient(90deg,var(--red),var(--green)); color:white; font-weight:700; font-size:1.2rem; padding:16px 30px; border-radius:50px; text-align:center; text-decoration:none; }
+footer { background: linear-gradient(90deg,var(--red),var(--green)); color:white; text-align:center; padding:20px; font-size:0.9rem; }
+footer a { color: #fff; text-decoration: none; font-weight: 600; }
+footer a:hover { text-decoration: underline; }
+
+@media(max-width:850px){ .hero h1{ font-size:1.7rem; } .service-content h2{ font-size:1.2rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">FUNPAGE</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="Booking.html">Book</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Our Recreational &amp; Experiential Services</h1>
+  <p>Funpage Sports &amp; Safaris specializes in delivering exceptional outdoor experiences, recreation, and professional sports programs across East and South Africa.</p>
+</section>
+
+<div class="container">
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/CMcNPMTD/1761005704919.png" alt="Team Building">
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-people-group"></i></span>Team Building</h2>
+      <p>Too much work makes Jack a dull boy! We provide enjoyable recreational activities to enhance team morale.</p>
+      <div class="more-content">
+        <ul>
+          <li>Entertainment and recreational activities for corporate and private groups.</li>
+          <li>Enhance communication, collaboration, and trust among team members.</li>
+          <li>Flexible daily or multi-day bookings based on budget.</li>
+          <li>We handle destination planning and logistics for a seamless experience.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20Team%20Building" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/RZPTjkT1/1761092732057.png" alt="School Sports &amp; Trips"> 
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-school"></i></span>School Sports &amp; Trips</h2>
+      <p>Enhancing sporting and recreational activities for schools and students.</p>
+      <div class="more-content">
+        <ul>
+          <li>Single-day or multi-day activities tailored to interests and budget.</li>
+          <li>Professional coaching in multiple sports disciplines.</li>
+          <li>Trips designed to enhance experiential learning at partner destinations.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20School%20Trips" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/HsGmGKL9/d815c23c562e945422447f35f83ee7ee.jpg" alt="Family &amp; Staff Trips">
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-users"></i></span>Family &amp; Staff Trips</h2>
+      <p>Tailored outdoor experiences for families and corporate staff.</p>
+      <div class="more-content">
+        <ul>
+          <li>Focus on connecting with the natural environment and African cultures.</li>
+          <li>Complete planning, booking, and guided journey support.</li>
+          <li>Activities suitable for both leisure and learning experiences.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20Family%20Trips" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/ZndLgph0/IMG-20241011-WA0041-5.jpg" alt="Camping &amp; Birthdays">
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-campground"></i></span>Camping &amp; Birthdays</h2>
+      <p>Memorable camping experiences and kid-friendly birthday events.</p>
+      <div class="more-content">
+        <ul>
+          <li>Camping at preferred destinations with full logistical support.</li>
+          <li>Birthday events with games and pool activities.</li>
+          <li>Professional lifeguards for pool safety.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20Camping" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/qqJ3cKvv/56b5d88fc0e1e1085564e0f202d95594.jpg" alt="Weddings &amp; Honeymoons">
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-ring"></i></span>Weddings &amp; Honeymoons</h2>
+      <p>Comprehensive wedding and honeymoon packages across Africa.</p>
+      <div class="more-content">
+        <ul>
+          <li>Includes BNB and hiking experiences.</li>
+          <li>Complete arrangement from start to finish or selective services.</li>
+          <li>Tailored packages to match personal preferences and budgets.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20Weddings" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/PrqRRQWZ/bc981759dbe77747671af57fa1b857fc.jpg" alt="Hiking &amp; Mountain Climbing">
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-mountain"></i></span>Hiking &amp; Mountain Climbing</h2>
+      <p>Professional hiking facilitators and guided climbs.</p>
+      <div class="more-content">
+        <ul>
+          <li>Certified hiking facilitators to meet individual goals.</li>
+          <li>Partnerships with sites and hotels for accommodation across East Africa.</li>
+          <li>Safe, structured, and memorable adventure experiences.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20Hiking" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/NM1MzjzG/718f76196ddca82a54ea48fc5032e631.jpg" alt="Professional Coaching &amp; Fitness"> 
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-dumbbell"></i></span>Professional Coaching &amp; Fitness</h2>
+      <p>Training programs for all ages and skill levels in sports and fitness.</p>
+      <div class="more-content">
+        <ul>
+          <li>Professional sports coaching across disciplines: Football, Cricket, Archery, Table Tennis, Lawn Tennis, Padel, Swimming, Chess, Badminton, Squash.</li>
+          <li>Sessions at your facility or organized at suitable nearby venues.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20Coaching" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/rwdQHhBv/1760527766105.png" alt="Swimming &amp; Fitness Bootcamps">
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-water"></i></span>Swimming &amp; Fitness Bootcamps</h2>
+      <p>Promoting active lifestyles through swimming and fitness training.</p>
+      <div class="more-content">
+        <ul>
+          <li>Swimming classes: one-on-one or group, beginner to elite.</li>
+          <li>Facilities: heated and regular pools.</li>
+          <li>Adult fitness: Aqua aerobics and bootcamps for groups.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20Swimming%20Bootcamps" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/0ywbwn05/f228609f49f634b6125bb751279dff76.jpg" alt="Accommodation &amp; Logistics">
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-bed"></i></span>Accommodation &amp; Logistics</h2>
+      <p>Sourcing and booking the perfect stay, from boutique hotels to campsites, with full itinerary management.</p>
+      <div class="more-content">
+        <ul>
+          <li>Vetted partnerships for reliable and comfortable accommodation across East and South Africa.</li>
+          <li>Full logistical support including site-to-site travel and meal planning.</li>
+          <li>Dedicated on-site support staff for seamless trip execution.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20Accommodation" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-card">
+    <img src="https://i.postimg.cc/VNNsFFjr/IMG-20251021-030622.jpg" alt="Events &amp; Transport">
+    <div class="service-content">
+      <h2><span class="icon-circle"><i class="fas fa-shuttle-van"></i></span>Events &amp; Transport</h2>
+      <p>Seamless transport and event facilitation across East Africa.</p>
+      <div class="more-content">
+        <ul>
+          <li>Reliable transport partnerships for timely transfers.</li>
+          <li>Provision of event materials: tents, PA systems, entertainment.</li>
+          <li>Comprehensive program planning and execution support.</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn explore" onclick="toggleMore(this)">View More</button>
+        <a href="https://wa.me/254791566724?text=Hi%20I%20want%20to%20inquire%20about%20Events" target="_blank" class="btn consult">Consult</a>
+      </div>
+    </div>
+  </div>
+
+  <a href="packages.html" class="view-packages">View All Our Packages</a>
+
+</div>
+
+<footer>
+  © 2025 Funpage Sports &amp; Safaris | All Rights Reserved | <a href="https://wa.me/254791566724" target="_blank">+254 791 566 724</a>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.2});
+document.querySelectorAll('.service-card').forEach(card => observer.observe(card));
+
+function toggleMore(btn){
+  const more = btn.closest('.service-content').querySelector('.more-content');
+  if(more.style.display === 'block'){
+    more.style.display = 'none';
+    btn.textContent = 'View More';
+  } else {
+    more.style.display = 'block';
+    btn.textContent = 'Show Less';
+  }
+}
+</script>
+
+</body></html>
